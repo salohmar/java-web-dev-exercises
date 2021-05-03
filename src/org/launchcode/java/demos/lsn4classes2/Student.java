@@ -68,11 +68,17 @@ public class Student {
     // TODO: Add your custom 'equals' method here. Consider which fields should match in order to call two
     //  Student objects equal.
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return studentId == student.studentId && numberOfCredits == student.numberOfCredits && Double.compare(student.gpa, gpa) == 0 && Objects.equals(name, student.name);
+    public boolean equals(Object toBeCompared) {
+        if (toBeCompared == this) {
+            return true;
+        }
+        if (toBeCompared == null){
+            return false;
+        } if (toBeCompared.getClass() != getClass()) {
+            return false;
+        }
+        Student theStudent = (Student) toBeCompared;
+        return theStudent.getStudentId() == this.getStudentId();
     }
 
     public String getName() {
@@ -109,6 +115,7 @@ public class Student {
 
     public static void main(String[] args) {
         Student sally = new Student("Sally",1,1,4.0);
+        Student sally2 = new Student("Sally", 1, 1, 4.0);
         System.out.println("The Student class works! " + sally.getName() + " is a student!");
         System.out.println(sally);
         System.out.println(sally.getGradeLevel());
@@ -117,5 +124,6 @@ public class Student {
         sally.addGrade(25, 3.8);
         System.out.println(sally.getGradeLevel());
         System.out.println(sally);
+        System.out.println(sally.equals(sally2));
     }
 }
